@@ -1,9 +1,10 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import User from './entity';
+import User from './user.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUserDto';
 import { UpdateUserDto } from './dto/updateUserDto';
+import { DeletedUserResponse, UserResponse } from './interface/UserResponse';
 
 @Injectable()
 export default class UsersService {
@@ -24,26 +25,38 @@ export default class UsersService {
     throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
   }
 
-  async createUser(user: CreateUserDto) {
+  async createUser(user: CreateUserDto): Promise<UserResponse<User>> {
     const newUser = await this.usersRepository.create(user);
-    await this.usersRepository.save(newUser);
-    return newUser;
+    const createdUser = await this.usersRepository.save(newUser);
+    return {
+      data: createdUser,
+      status: 'Created',
+    };
   }
 
-  async updateUser(id: number, user: UpdateUserDto) {
+  async updateUser(
+    id: number,
+    user: UpdateUserDto,
+  ): Promise<UserResponse<User>> {
     await this.usersRepository.update(id, user);
     const updatedUser = await this.usersRepository.findOneBy({ id: id });
     if (updatedUser) {
-      return updatedUser;
+      return {
+        data: updatedUser,
+        status: 'Updated',
+      };
     }
     throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
   }
 
-  async deleteUser(id: number) {
+  async deleteUser(id: number): Promise<DeletedUserResponse> {
     const deleteResponse = await this.usersRepository.delete(id);
-    console.log(deleteResponse);
     if (!deleteResponse.affected) {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
+    return {
+      id: id,
+      status: 'Deleted',
+    };
   }
 }
