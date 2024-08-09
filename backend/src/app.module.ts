@@ -6,6 +6,7 @@ import { UserModule } from './user/module';
 
 @Module({
   imports: [
+    UserModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         POSTGRES_HOST: Joi.string().required(),
@@ -17,7 +18,6 @@ import { UserModule } from './user/module';
       }),
     }),
     DatabaseModule,
-    UserModule,
   ],
   controllers: [],
   providers: [],
