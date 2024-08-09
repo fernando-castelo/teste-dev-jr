@@ -1,10 +1,11 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import User from './user.entity';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUserDto';
 import { UpdateUserDto } from './dto/updateUserDto';
 import { DeletedUserResponse, UserResponse } from './interface/UserResponse';
+import UserNotFoundException from './exceptions/userNotFoundException';
 
 @Injectable()
 export default class UsersService {
@@ -22,7 +23,7 @@ export default class UsersService {
     if (user) {
       return user;
     }
-    throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
+    throw new UserNotFoundException(_id);
   }
 
   async createUser(user: CreateUserDto): Promise<UserResponse<User>> {
@@ -46,13 +47,13 @@ export default class UsersService {
         status: 'Updated',
       };
     }
-    throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
+    throw new UserNotFoundException(id);
   }
 
   async deleteUser(id: number): Promise<DeletedUserResponse> {
     const deleteResponse = await this.usersRepository.delete(id);
     if (!deleteResponse.affected) {
-      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
+      throw new UserNotFoundException(id);
     }
     return {
       id: id,
