@@ -51,6 +51,20 @@ const getUsers = async () : Promise<User[]> => {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
     }
     
+  }
+
+  const deleteUser = async (userId : Number) : Promise<Response> => {
+    const response = await fetch(`${API_URL}/${userId}`, {
+        method: 'DELETE',
+    })
+
+    if(response.ok) {
+        return response;
+    } else {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
 }
 
-  export { getUsers, createUser, updateUser };
+
+
+  export { getUsers, createUser, updateUser, deleteUser };

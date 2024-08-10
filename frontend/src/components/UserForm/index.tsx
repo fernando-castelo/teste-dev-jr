@@ -130,8 +130,6 @@ const UserForm: React.FC<UserFormProps> = ({ user, closeModal, isEditMode }) => 
             </Button>
           </HStack>
         </ModalFooter>
-
-        
       </form>
     </Box>
   );
