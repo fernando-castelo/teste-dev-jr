@@ -6,15 +6,18 @@ import {
   Box,
   Button,
   FormErrorMessage,
+  ModalFooter,
+  HStack,
 } from '@chakra-ui/react';
 import { User, UserCreateDto, UserUpdateDto } from '../../entites';
 import { createUser, updateUser } from '../../services/userService';
 
 interface UserFormProps {
   user: User | null;
+  closeModal: (() => void)
   isEditMode: boolean;
 }
-const UserForm: React.FC<UserFormProps> = ({ user, isEditMode }) => {
+const UserForm: React.FC<UserFormProps> = ({ user, closeModal, isEditMode }) => {
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
@@ -104,9 +107,31 @@ const UserForm: React.FC<UserFormProps> = ({ user, isEditMode }) => {
           <FormErrorMessage>{emailError}</FormErrorMessage>
         </FormControl>
 
-        <Button type="submit" colorScheme="blue">
-          {isEditMode ? 'Atualizar' : 'Criar'}
-        </Button>
+        <ModalFooter>
+          <HStack spacing={4}>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              size="md"
+              borderRadius="md"
+              _hover={{ boxShadow: "lg" }}
+            >
+              {isEditMode ? 'Atualizar' : 'Criar'}
+            </Button>
+            <Button
+              colorScheme='red'
+              size="md"
+              borderRadius="md"
+              boxShadow="md"
+              _hover={{ boxShadow: "lg" }}
+              onClick={closeModal}
+            >
+              Cancelar
+            </Button>
+          </HStack>
+        </ModalFooter>
+
+        
       </form>
     </Box>
   );

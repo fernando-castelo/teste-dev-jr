@@ -1,7 +1,8 @@
-import { Table, TableContainer, Tbody, Th, Thead, Tr, Td, AlertDialogHeader, Button, HStack, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import { Table, TableContainer, Tbody, Th, Thead, Tr, Td, Button, HStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { User } from "../../entites";
 import { UserForm } from "../UserForm";
+import GenericModal from "../GenericModal.tsx";
 
 interface UserTableProps {
   users: User[];
@@ -47,24 +48,12 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
         </Table>      
       </TableContainer>
 
-        <Modal isOpen={isOpen} onClose={closeModal}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Editar Usuário</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <UserForm
-                user={editUser}
-                isEditMode={isEditMode}
-              />
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme='red' mr={3} onClick={closeModal}>
-                Cancelar
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+      <GenericModal
+        isOpen={isOpen}
+        onClose={closeModal}
+        header="Editar Usuário"
+        body={<UserForm user={editUser} closeModal={closeModal} isEditMode={isEditMode} />}
+      />
     </div>   
   );
 };

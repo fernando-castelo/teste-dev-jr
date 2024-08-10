@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Heading, Container, useDisclosure, Button, ModalOverlay, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Text } from '@chakra-ui/react';
+import { Heading, Container, useDisclosure, Button } from '@chakra-ui/react';
 import { UserTable } from './components/UserTable';
 import { getUsers } from './services/userService';
 import { User } from './entites';
 import { UserForm } from './components/UserForm';
+import GenericModal from './components/GenericModal.tsx';
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -47,22 +48,12 @@ function App() {
       <Heading>Tabela de Usuários</Heading>
       <Button onClick={onOpen}>Cadastrar Usuário</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Cadastrar Usuário</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <UserForm user={null} isEditMode={false}/>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='red' mr={3} onClick={onClose}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <GenericModal
+        isOpen={isOpen}
+        onClose={onClose}
+        header="Cadastrar Usuário"
+        body={<UserForm user={null} closeModal={close} isEditMode={false} />}
+      />
       <UserTable users={users} />
     </Container>
   );
