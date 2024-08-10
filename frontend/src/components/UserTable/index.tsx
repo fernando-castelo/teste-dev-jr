@@ -1,12 +1,14 @@
-import { Table, TableContainer, Tbody, Th, Thead, Tr, Td } from "@chakra-ui/react";
-import React from "react";
+import { Table, TableContainer, Tbody, Th, Thead, Tr, Td, AlertDialogHeader, Button, HStack, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { User } from "../../entites";
 
 interface UserTableProps {
   users: User[];
 }
 
+
 const UserTable: React.FC<UserTableProps> = ({ users }) => {
+
   return (
     <div className="UserTable">
       <TableContainer>
@@ -22,10 +24,15 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
               <Tr key={user.id}>
                 <Td>{user.nomeCompleto}</Td>
                 <Td>{user.email}</Td>
+                <Td>
+                <HStack spacing={4}>
+                  {/* <Button colorScheme="blue" onClick={() => openEditModal(user)}>Editar</Button> */}
+                </HStack>
+              </Td>
               </Tr>
             ))}
           </Tbody>
-        </Table>
+        </Table>      
       </TableContainer>
     </div>
   );

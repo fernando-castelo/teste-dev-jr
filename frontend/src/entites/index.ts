@@ -1,10 +1,16 @@
 export interface User {
-    id: string;
+    id: number;
     nomeCompleto: string;
     email: string;
 }
 
 export interface UserCreateDto {
+    nomeCompleto: string;
+    email: string;
+}
+
+export interface UserUpdateDto {
+    id: number;
     nomeCompleto: string;
     email: string;
 }

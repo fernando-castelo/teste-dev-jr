@@ -3,13 +3,12 @@ import { Heading, Container, useDisclosure, Button, ModalOverlay, Modal, ModalBo
 import { UserTable } from './components/UserTable';
 import { getUsers } from './services/userService';
 import { User } from './entites';
-import { UserCreateForm } from './components/UserCreateForm';
+import { UserForm } from './components/UserForm';
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
@@ -52,7 +51,7 @@ function App() {
           <ModalHeader>Cadastrar Usuário</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <UserCreateForm/>
+            <UserForm user={null} isEditMode={false}/>
           </ModalBody>
 
           <ModalFooter>
