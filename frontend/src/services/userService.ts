@@ -35,4 +35,22 @@ const getUsers = async () : Promise<User[]> => {
   
   }
 
-  export { getUsers, createUser };
+  const updateUser = async (userId : String, userUpdateDto : UserCreateDto) : Promise<User> => {
+    const response = await fetch(`${API_URL}${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userUpdateDto)
+    })
+
+    if(response.ok) {
+        const responseData = await response.json();
+        return responseData;
+    } else {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+    
+}
+
+  export { getUsers, createUser, updateUser };
