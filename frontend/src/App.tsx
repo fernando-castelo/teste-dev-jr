@@ -3,6 +3,7 @@ import { Heading, Container, useDisclosure, Button, ModalOverlay, Modal, ModalBo
 import { UserTable } from './components/UserTable';
 import { getUsers } from './services/userService';
 import { User } from './entites';
+import { UserCreateForm } from './components/UserCreateForm';
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -42,25 +43,22 @@ function App() {
       justifyContent="center"
       h="100vh"
     >
-      <Heading mb={4}>User Table</Heading>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Heading mb={4}>Tabela de Usuários</Heading>
+      <Button onClick={onOpen}>Cadastrar Usuário</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Cadastrar Usuário</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>
-              ADICIONE UM USUARIO
-            </Text>
+            <UserCreateForm/>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
+            <Button colorScheme='red' mr={3} onClick={onClose}>
+              Cancelar
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

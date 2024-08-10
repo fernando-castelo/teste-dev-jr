@@ -1,4 +1,3 @@
-// UserTable.tsx
 import { Table, TableContainer, Tbody, Th, Thead, Tr, Td } from "@chakra-ui/react";
 import React from "react";
 import { User } from "../../entites";

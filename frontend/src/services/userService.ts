@@ -1,4 +1,4 @@
-import { User } from "../entites";
+import { User, UserCreateDto } from "../entites";
 
 const API_URL = 'http://localhost:3000/users';
 
@@ -17,4 +17,22 @@ const getUsers = async () : Promise<User[]> => {
 
   }
 
-  export { getUsers };
+  const createUser = async (createUserDto: UserCreateDto):  Promise<User> => {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(createUserDto)
+  })
+
+  if(response.ok) {
+      const responseData = await response.json();
+      return responseData;
+  } else {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+  }
+  
+  }
+
+  export { getUsers, createUser };
