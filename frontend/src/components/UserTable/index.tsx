@@ -1,6 +1,7 @@
 import { Table, TableContainer, Tbody, Th, Thead, Tr, Td, AlertDialogHeader, Button, HStack, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { User } from "../../entites";
+import { UserForm } from "../UserForm";
 
 interface UserTableProps {
   users: User[];
@@ -8,10 +9,21 @@ interface UserTableProps {
 
 
 const UserTable: React.FC<UserTableProps> = ({ users }) => {
+  const [editUser, setEditUser] = useState<User | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const openEditModal = (user: User) => {
+    setEditUser(user);
+    setIsEditMode(true);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div className="UserTable">
-      <TableContainer>
+      <TableContainer maxW="100%" overflowX="auto">
         <Table>
           <Thead>
             <Tr>
@@ -25,8 +37,8 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
                 <Td>{user.nomeCompleto}</Td>
                 <Td>{user.email}</Td>
                 <Td>
-                <HStack spacing={4}>
-                  {/* <Button colorScheme="blue" onClick={() => openEditModal(user)}>Editar</Button> */}
+                <HStack>
+                  <Button colorScheme="blue" onClick={() => openEditModal(user)}>Editar</Button>
                 </HStack>
               </Td>
               </Tr>
@@ -34,7 +46,26 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
           </Tbody>
         </Table>      
       </TableContainer>
-    </div>
+
+        <Modal isOpen={isOpen} onClose={closeModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Editar Usuário</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <UserForm
+                user={editUser}
+                isEditMode={isEditMode}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme='red' mr={3} onClick={closeModal}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+    </div>   
   );
 };
 

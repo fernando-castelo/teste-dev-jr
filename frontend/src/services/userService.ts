@@ -36,7 +36,7 @@ const getUsers = async () : Promise<User[]> => {
   }
 
   const updateUser = async (userId : String, userUpdateDto : UserCreateDto) : Promise<User> => {
-    const response = await fetch(`${API_URL}${userId}`, {
+    const response = await fetch(`${API_URL}/${userId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

@@ -40,9 +40,11 @@ function App() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      h="100vh"
+      maxW="100%"
+      overflowX="auto"
+      p={4}  
     >
-      <Heading mb={4}>Tabela de Usuários</Heading>
+      <Heading>Tabela de Usuários</Heading>
       <Button onClick={onOpen}>Cadastrar Usuário</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
