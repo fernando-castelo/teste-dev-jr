@@ -1,121 +1,85 @@
+# Cloudged - Desafio Técnico Desenvolvedor
 
-[![Logo](logo.png)](www.cloudged.com.br)
+## Python Script
 
-<h1 style="text-align: center;">Desafio - Desenvolvedor jr</h1>
+Script criado para extração de conteúdo em um arquivo .txt para .xlsx com python e as bibliotecas pandas e openpyxl
 
-## Introdução
+## Backend
 
-Olá! Este desafio tem por objetivo avaliar a capacidade técnica de candidatos à vaga de desenvolvedor júnior da [CloudGed Consultoria Tributária](www.cloudged.com.br). Além disso, a avaliação consiste em analisar a capacidade de resolução de problemas e os conhecimentos técnicos específicos necessários para o cargo.
+Desenvolvimento de uma API RESTful utilizando NestJS. A API gerencia operações CRUD (Create, Read, Update, Delete) para uma entidade chamada "User".
 
-## Instruções
+## Frontend
 
-1.  Faça um fork deste repositório para a sua conta pessoal do GitHub.
-2.  Siga as instruções do desafio.
-3.  Após finalizar, faça um pull request para este repositório com a solução do desafio.
-4.  Você tem até 4 dias a partir do recebimento deste teste para enviar a sua solução.
+Desenvolvimento de uma aplicação frontend com React.js e Chakra UI, focada em uma interface intuitiva e responsiva. A aplicação interage com a API desenvolvida no backend para permitir aos usuários visualizar uma lista de usuários, adicionar novos usuários, atualizar informações de usuários existentes e remover usuários. Utiliza componentes estilizados do Chakra UI para uma experiência de usuário moderna.
 
-## O desafio
-1.  Utilizando a linguagem de sua preferência, desenvolva um programa que extraia o conteúdo do arquivo .txt disponibilizado e que depois salve os dados extraídos em um arquivo no formato .xlsx
-2.  Desenvolva uma RESTful API em Node.js para o gereciamento de um cadastro de usuários. A API deverá conter os seguintes endpoints:
+## Como usar
 
-    -   **GET /users**: Retorna a lista de usuários cadastrados.   
-                Seu retorno deve ser no seguinte formato JSON com status code HTTP 200:
-        
-        ```json
-        [
-            {
-                "id": 1,
-                "nomeCompleto": "João da Silva",
-                "email": "joao.silva@gmail.com"
-            },
-            {
-                "id": 2,
-                "nomeCompleto": "Maria da Silva",
-                "email": "maria.silva@gmail.com"
-            }
-        ]
-    -   **GET /users/:id**: Retorna os dados de um usuário específico.  
-                Seu retorno deve ser no seguinte formato JSON com status code HTTP 200:
-        
-        ```json
-        {
-            "id": 1,
-            "nomeCompleto": "João da Silva",
-            "email": "joao.silva@gmail.com"
-        }
-    -   **POST /users**: Adiciona um novo usuário.  
-                Corpo da requisição:
+## Pré-requisitos
 
-        ```json
-        {
-            "nomeCompleto": "João da Silva",
-            "email": "joao.silva@gmail.com"
-        }
-        ```
+Para iniciar, você precisa ter as seguintes ferramentas instaladas em seu sistema:
 
-        Seu retorno deverá ser no seguinte formato JSON com status code HTTP 201:
-        
-        ```json
-        {
-            "id": 1,
-            "nomeCompleto": "João da Silva",
-            "email": "joao.silva@gmail.com",
-            "status": "Created"
-        }
-        ```
-
-    -   **PUT /users/:id**: Atualiza os dados de um usuário específico.   
-                Corpo da requisição:
-
-        ```json
-        {
-            "nomeCompleto": "João Pereira da Silva",
-            "email": "joao.silva@gmail.com"
-        }
-        ```
-
-        Seu retorno deverá ser no seguinte formato JSON com status code HTTP 200:
-        
-        ```json
-        {
-            "id": 1,
-            "nomeCompleto": "João Pereira da Silva",
-            "email": "joao.silva@gmail.com",
-            "status": "Updated"
-        }
-        ```
-    -   **DELETE /users/:id**: Remove um usuário específico.   
-                Seu retorno deverá ser no seguinte formato JSON com status code HTTP 200:
-        
-        ```json
-        {
-            "id": 1,
-            "status": "Deleted"
-        }
-        ```
-
-3. Desenvolva uma interface utilizando o framework React.js que deverá realizar a integração com a API que você desenvolveu no item 2. O layout da interface é livre, mas deverá conter as seguintes funcionalidades:
-    -   Listagem de usuários cadastrados;
-    -   Adição de um novo usuário;
-    -   Edição de um usuário específico;
-    -   Remoção de um usuário específico.
+-  [Python](https://www.python.org/downloads/) (Versão 3.12 ou superior)
+-  [Node.js](https://nodejs.org/en/download/) (Versão 18 ou superior)
+-  [NPM](https://www.npmjs.com/get-npm)
+-  Docker: [Ubuntu](https://docs.docker.com/engine/install/ubuntu/) ou [Windows](https://docs.docker.com/desktop/install/windows-install/)
 
 
-## Critérios de avaliação
+## Python Script
 
--   Organização do código;
--   Qualidade do código;
--   Documentação do código;
--   Cumprimento dos requisitos;
--   Boas práticas de programação;
--   Utilização de boas práticas de versionamento de código;
--   Utilização de boas práticas de desenvolvimento de APIs RESTful;
--   Utilização de boas práticas de desenvolvimento de interfaces com o usuário.
+Na pasta raiz, execute o arquivo: 
+
+```bash
+python .\desafio01.py
+```
+
+## Backend
+
+Na pasta raiz, acesse o diretorio backend: 
+
+```bash
+cd backend
+```
+
+Instale as dependências: 
+
+```bash
+npm install
+```
+
+Inicie o Docker:
+
+```bash
+docker compose up
+```
+
+Inice a Aplicação:
+
+```bash
+npm run start:dev
+```
+
+Acesse a pgAdmin no endereço http://localhost:8080/ e crie o banco com os dados do arquivo .env
+
+Acesse a api no endereço http://localhost:3000/
+
+## Frontend
+Na pasta raiz, acesse o diretorio frontend: 
+
+```bash
+cd frontend
+```
+
+Instale as dependências: 
+
+```bash
+npm install
+```
+
+Inice a Aplicação:
+
+```bash
+npm run dev
+```
+Acesse a aplicação no endereço http://localhost:5173/
 
 
-## Conclusão
-
-Não se preocupe se você não conseguir finalizar todos os itens do desafio. O importante é que você consiga demonstrar suas habilidades técnicas e conhecimentos adquiridos até o momento.   
-Foque em entregar um código bem organizado e documentado, e que atenda aos requisitos propostos.
-
-Boa sorte! :rocket:
